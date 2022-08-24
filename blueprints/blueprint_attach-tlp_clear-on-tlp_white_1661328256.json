@@ -1,0 +1,101 @@
+{
+  "WorkflowBlueprint": {
+    "id": "13",
+    "uuid": "9ebd5196-32fe-4c35-87c6-f817c98f2e84",
+    "name": "Attach tlp:clear on tlp:white",
+    "description": "[event-publish]\r\nAttach the tag `tlp:clear` on the Event or Attributes having the tag `tlp:white`",
+    "timestamp": "1659703283",
+    "data": [
+      {
+        "id": 55,
+        "name": "Tag operation",
+        "data": {
+          "indexed_params": {
+            "scope": "attribute",
+            "action": "add",
+            "tags": [
+              "tlp:clear"
+            ]
+          },
+          "saved_filters": {
+            "selector": "Event._AttributeFlattened.{n}",
+            "value": "tlp:white",
+            "operator": "in",
+            "path": "Tag.{n}.name"
+          },
+          "node_uid": "1thi0m5aning8cd",
+          "module_type": "action",
+          "id": "tag_operation",
+          "name": "Tag operation",
+          "multiple_output_connection": false,
+          "previous_module_version": "?",
+          "module_version": "0.1"
+        },
+        "class": "block-type-default",
+        "typenode": false,
+        "inputs": {
+          "input_1": {
+            "connections": [
+              {
+                "node": "56",
+                "input": "output_1"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "output_1": {
+            "connections": []
+          }
+        },
+        "pos_x": 258.08090076796316,
+        "pos_y": 432.0795455984827
+      },
+      {
+        "id": 56,
+        "name": "Tag operation",
+        "data": {
+          "indexed_params": {
+            "tags": [
+              "tlp:clear"
+            ]
+          },
+          "saved_filters": {
+            "selector": "",
+            "value": "tlp:white",
+            "operator": "in",
+            "path": "Tag.{n}.name"
+          },
+          "node_uid": "1tqsssssmb90at50rr3bswr",
+          "module_type": "action",
+          "id": "tag_operation",
+          "name": "Tag operation",
+          "multiple_output_connection": false,
+          "previous_module_version": "?",
+          "module_version": "0.1"
+        },
+        "class": "block-type-default",
+        "typenode": false,
+        "inputs": {
+          "input_1": {
+            "connections": []
+          }
+        },
+        "outputs": {
+          "output_1": {
+            "connections": [
+              {
+                "node": "55",
+                "output": "input_1"
+              }
+            ]
+          }
+        },
+        "pos_x": -165.86646765308933,
+        "pos_y": 431.0269140195354
+      }
+    ],
+    "default": false,
+    "mermaid": "flowchart LR\n    56[\"fas:fa-tags  Tag operation\"] --> 55[\"fas:fa-tags  Tag operation\"]\n"
+  }
+}

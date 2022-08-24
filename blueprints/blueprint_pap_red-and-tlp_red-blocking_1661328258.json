@@ -1,0 +1,102 @@
+{
+  "WorkflowBlueprint": {
+    "id": "8",
+    "uuid": "1b51bef9-ed0e-4d49-b3ea-5acecd3d5d31",
+    "name": "PAP:RED and tlp:red Blocking",
+    "description": "[enrichment-before-query]\r\nBlocks action if any attributes have the `PAP:RED` or tlp:red` tag",
+    "timestamp": "1658492776",
+    "data": [
+      {
+        "id": 53,
+        "name": "IF :: Tag",
+        "data": {
+          "indexed_params": {
+            "scope": "event_attribute",
+            "condition": "in_or",
+            "tags": [
+              "PAP:RED",
+              "tlp:red"
+            ]
+          },
+          "saved_filters": {
+            "selector": "",
+            "value": "",
+            "operator": "",
+            "path": ""
+          },
+          "node_uid": "5canassssmb0jic9ajm5ylm",
+          "module_type": "logic",
+          "id": "tag-if",
+          "name": "IF :: Tag",
+          "multiple_output_connection": false,
+          "previous_module_version": "0.1",
+          "module_version": "0.1"
+        },
+        "class": "block-type-if block-type-logic",
+        "typenode": false,
+        "inputs": {
+          "input_1": {
+            "connections": [
+              {
+                "node": "1",
+                "input": "output_1"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "output_1": {
+            "connections": [
+              {
+                "node": "54",
+                "output": "input_1"
+              }
+            ]
+          },
+          "output_2": {
+            "connections": []
+          }
+        },
+        "pos_x": -65,
+        "pos_y": 6.052631578947368
+      },
+      {
+        "id": 54,
+        "name": "Stop execution",
+        "data": {
+          "indexed_params": [],
+          "saved_filters": {
+            "selector": "",
+            "value": "",
+            "operator": "",
+            "path": ""
+          },
+          "node_uid": "5casweeeeb60u625yrd2grj",
+          "module_type": "action",
+          "id": "stop-execution",
+          "name": "Stop execution",
+          "multiple_output_connection": false,
+          "previous_module_version": "0.1",
+          "module_version": "0.1"
+        },
+        "class": "block-type-default",
+        "typenode": false,
+        "inputs": {
+          "input_1": {
+            "connections": [
+              {
+                "node": "53",
+                "input": "output_1"
+              }
+            ]
+          }
+        },
+        "outputs": [],
+        "pos_x": 406.05263157894734,
+        "pos_y": 64
+      }
+    ],
+    "default": false,
+    "mermaid": "flowchart LR\n    53[/\"fas:fa-code-branch  IF :: Tag\"/] --> 54[\"fas:fa-ban  Stop execution\"]\n"
+  }
+}
