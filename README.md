@@ -13,7 +13,8 @@ For more information about MISP workflows in MISP, the training materials [MISP 
 
 ## Blueprints
 
-- [Stop workflow based on `tlp` and `pap` taxonomy](./blueprints/stop-tlp-pap.json) - Blueprint that stop a workflow execution if the data being processed is tagged with `tlp:red` or `PAP:RED`.
+- [Attach `tlp:clear` on `tlp:white`](./blueprints/blueprint_attach-tlp_clear-on-tlp_white_1661328256.json) - Attach the `tlp:clear` tag on elements having the `tlp:white` tag.
+- [`PAP:RED` and `tlp:red` Blocking](./blueprints/blueprint_pap_red-and-tlp_red-blocking_1661328258.json) - Block actions if any attributes have the `PAP:RED` or `tlp:red` tag.
 
 ## How to contribute your workflow blueprints?
 
