@@ -1,0 +1,201 @@
+{
+  "WorkflowBlueprint": {
+    "id": "15",
+    "uuid": "3351fa8c-6cae-4d78-8105-c0877236d817",
+    "name": "Disable to_ids flag for existing hash in hashlookup",
+    "description": "[event-publish]\r\nDisable to_ids flag for existing hash in hashlookup",
+    "timestamp": "1667225208",
+    "data": [
+      {
+        "id": 1,
+        "name": "Event Publish",
+        "data": {
+          "id": "event-publish",
+          "scope": "event",
+          "name": "Event Publish",
+          "description": "This trigger is called just before a MISP Event starts the publishing process",
+          "icon": "upload",
+          "inputs": 0,
+          "outputs": 1,
+          "blocking": true,
+          "misp_core_format": true,
+          "trigger_overhead": 1,
+          "trigger_overhead_message": "",
+          "is_misp_module": false,
+          "is_custom": false,
+          "expect_misp_core_format": false,
+          "version": "0.1",
+          "icon_class": "",
+          "multiple_output_connection": false,
+          "support_filters": false,
+          "saved_filters": {
+            "selector": "",
+            "value": "",
+            "operator": "",
+            "path": ""
+          },
+          "module_type": "trigger",
+          "html_template": "trigger",
+          "disabled": false,
+          "node_uid": "7p0cjbx68g1vpi",
+          "indexed_params": [],
+          "previous_module_version": "0.1",
+          "module_version": "0.1"
+        },
+        "class": "block-type-trigger",
+        "typenode": false,
+        "inputs": [],
+        "outputs": {
+          "output_1": {
+            "connections": [
+              {
+                "node": "10",
+                "output": "input_1"
+              }
+            ]
+          }
+        },
+        "pos_x": -1115,
+        "pos_y": 826.114553556415
+      },
+      {
+        "id": 10,
+        "name": "Attach enrichment",
+        "data": {
+          "node_uid": "7yeeeecyi1w0ef1dhbw72ru",
+          "indexed_params": {
+            "modules": "hashlookup"
+          },
+          "saved_filters": {
+            "selector": "",
+            "value": "",
+            "operator": "",
+            "path": ""
+          },
+          "module_type": "action",
+          "id": "attach-enrichment",
+          "name": "Attach enrichment",
+          "multiple_output_connection": false,
+          "previous_module_version": "0.1",
+          "module_version": "0.1"
+        },
+        "class": "block-type-default",
+        "typenode": false,
+        "inputs": {
+          "input_1": {
+            "connections": [
+              {
+                "node": "1",
+                "input": "output_1"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "output_1": {
+            "connections": [
+              {
+                "node": "13",
+                "output": "input_1"
+              }
+            ]
+          }
+        },
+        "pos_x": -561.68134690078,
+        "pos_y": 901
+      },
+      {
+        "id": 13,
+        "name": "Attribute IDS Flag operation",
+        "data": {
+          "node_uid": "82lllljfr2v0520z1zbs5fg",
+          "indexed_params": {
+            "action": "remove"
+          },
+          "saved_filters": {
+            "selector": "Event._AttributeFlattened.{n}",
+            "value": "filename",
+            "operator": "equals",
+            "path": "enrichment.{n}.Object.{n}.Attribute.{n}[object_relation=FileName].type"
+          },
+          "module_type": "action",
+          "id": "attribute_ids_flag_operation",
+          "name": "Attribute IDS Flag operation",
+          "multiple_output_connection": false,
+          "previous_module_version": "0.2",
+          "module_version": "0.1"
+        },
+        "class": "block-type-default",
+        "typenode": false,
+        "inputs": {
+          "input_1": {
+            "connections": [
+              {
+                "node": "10",
+                "input": "output_1"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "output_1": {
+            "connections": [
+              {
+                "node": "16",
+                "output": "input_1"
+              }
+            ]
+          }
+        },
+        "pos_x": -68.81486463763243,
+        "pos_y": 956.1851353623675
+      },
+      {
+        "id": 16,
+        "name": "Tag operation",
+        "data": {
+          "node_uid": "833llljfr2v0ohqsurujcvs",
+          "indexed_params": {
+            "scope": "attribute",
+            "tags": [
+              "ids-removed"
+            ]
+          },
+          "saved_filters": {
+            "selector": "Event._AttributeFlattened.{n}",
+            "value": "filename",
+            "operator": "in",
+            "path": "enrichment.{n}.Object.{n}.Attribute.{n}[object_relation=FileName].type"
+          },
+          "module_type": "action",
+          "id": "tag_operation",
+          "name": "Tag operation",
+          "multiple_output_connection": false,
+          "previous_module_version": "0.2",
+          "module_version": "0.2"
+        },
+        "class": "block-type-default",
+        "typenode": false,
+        "inputs": {
+          "input_1": {
+            "connections": [
+              {
+                "node": "13",
+                "input": "output_1"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "output_1": {
+            "connections": []
+          }
+        },
+        "pos_x": 365,
+        "pos_y": 888.8148646376325
+      }
+    ],
+    "default": false,
+    "mermaid": "flowchart LR\n    1{{\"fas:fa-upload  Event Publish\"}} --> 10[\"fas:fa-asterisk  Attach enrichment\"]\n    10[\"fas:fa-asterisk  Attach enrichment\"] --> 13[\"fas:fa-edit  Attribute IDS Flag operation\"]\n    13[\"fas:fa-edit  Attribute IDS Flag operation\"] --> 16[\"fas:fa-tags  Tag operation\"]\n"
+  }
+}
