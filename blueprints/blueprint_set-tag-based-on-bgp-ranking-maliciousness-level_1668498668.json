@@ -1,0 +1,199 @@
+{
+  "WorkflowBlueprint": {
+    "id": "17",
+    "uuid": "4d426fce-26da-4c5d-a4f5-0d99377ba43a",
+    "name": "Set tag based on BGP Ranking maliciousness level",
+    "description": "[event-publish] Set tag based on BGP Ranking maliciousness level. A threshold of 50 is set by default but can be modified.\r\n",
+    "timestamp": "1668498644",
+    "data": [
+      {
+        "id": 1,
+        "name": "Event Publish",
+        "data": {
+          "id": "event-publish",
+          "scope": "event",
+          "name": "Event Publish",
+          "description": "This trigger is called just before a MISP Event starts the publishing process",
+          "icon": "upload",
+          "inputs": 0,
+          "outputs": 1,
+          "blocking": true,
+          "misp_core_format": true,
+          "trigger_overhead": 1,
+          "trigger_overhead_message": "",
+          "is_misp_module": false,
+          "is_custom": false,
+          "expect_misp_core_format": false,
+          "version": "0.1",
+          "icon_class": "",
+          "multiple_output_connection": false,
+          "support_filters": false,
+          "saved_filters": {
+            "selector": "",
+            "value": "",
+            "operator": "",
+            "path": ""
+          },
+          "module_type": "trigger",
+          "html_template": "trigger",
+          "disabled": false,
+          "node_uid": "3gvyweeeerd0k8r4h2wvyja",
+          "indexed_params": [],
+          "previous_module_version": "0.1",
+          "module_version": "0.1"
+        },
+        "class": "block-type-trigger",
+        "typenode": false,
+        "inputs": [],
+        "outputs": {
+          "output_1": {
+            "connections": [
+              {
+                "node": "30",
+                "output": "input_1"
+              }
+            ]
+          }
+        },
+        "pos_x": -2671,
+        "pos_y": 461.70384223053384
+      },
+      {
+        "id": 28,
+        "name": "Tag operation",
+        "data": {
+          "node_uid": "3gwop7778a40uswk2wd8h7l",
+          "indexed_params": {
+            "scope": "attribute",
+            "tags": [
+              "adversary:infrastructure-state=\"active\""
+            ]
+          },
+          "saved_filters": {
+            "selector": "Event._AttributeFlattened.{n}",
+            "value": "float",
+            "operator": "equals",
+            "path": "enrichment.{n}.Object.{n}[name=bgp-ranking].Attribute.{n}[object_relation=position][value<50].type"
+          },
+          "module_type": "action",
+          "id": "tag_operation",
+          "name": "Tag operation",
+          "multiple_output_connection": false,
+          "previous_module_version": "0.2",
+          "module_version": "0.2"
+        },
+        "class": "block-type-default",
+        "typenode": false,
+        "inputs": {
+          "input_1": {
+            "connections": [
+              {
+                "node": "29",
+                "input": "output_1"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "output_1": {
+            "connections": []
+          }
+        },
+        "pos_x": -1471,
+        "pos_y": 374.70384223053384
+      },
+      {
+        "id": 29,
+        "name": "Attach enrichment",
+        "data": {
+          "node_uid": "3gx1sssstir0svqmdxvefbq",
+          "indexed_params": {
+            "modules": "bgpranking"
+          },
+          "saved_filters": {
+            "selector": "",
+            "value": "",
+            "operator": "",
+            "path": ""
+          },
+          "module_type": "action",
+          "id": "attach-enrichment",
+          "name": "Attach enrichment",
+          "multiple_output_connection": false,
+          "previous_module_version": "0.1",
+          "module_version": "0.1"
+        },
+        "class": "block-type-default",
+        "typenode": false,
+        "inputs": {
+          "input_1": {
+            "connections": [
+              {
+                "node": "30",
+                "input": "output_1"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "output_1": {
+            "connections": [
+              {
+                "node": "28",
+                "output": "input_1"
+              }
+            ]
+          }
+        },
+        "pos_x": -1870,
+        "pos_y": 498.70384223053384
+      },
+      {
+        "id": 30,
+        "name": "Concurrent Task",
+        "data": {
+          "node_uid": "3gx6i0hxc6laosye5",
+          "indexed_params": [],
+          "saved_filters": {
+            "selector": "",
+            "value": "",
+            "operator": "",
+            "path": ""
+          },
+          "module_type": "logic",
+          "id": "concurrent-task",
+          "name": "Concurrent Task",
+          "multiple_output_connection": true,
+          "previous_module_version": "0.1",
+          "module_version": "0.1"
+        },
+        "class": "block-type-concurrent block-type-logic",
+        "typenode": false,
+        "inputs": {
+          "input_1": {
+            "connections": [
+              {
+                "node": "1",
+                "input": "output_1"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "output_1": {
+            "connections": [
+              {
+                "node": "29",
+                "output": "input_1"
+              }
+            ]
+          }
+        },
+        "pos_x": -2273,
+        "pos_y": 511.70384223053384
+      }
+    ],
+    "default": false,
+    "mermaid": "flowchart LR\n    1{{\"fas:fa-upload  Event Publish\"}} --> 30[/\"fas:fa-random  Concurrent Task\"/]\n    29[\"fas:fa-asterisk  Attach enrichment\"] --> 28[\"fas:fa-tags  Tag operation\"]\n    30[/\"fas:fa-random  Concurrent Task\"/] --> 29[\"fas:fa-asterisk  Attach enrichment\"]\n"
+  }
+}
