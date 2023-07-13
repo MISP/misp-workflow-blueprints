@@ -1,0 +1,511 @@
+{
+    "WorkflowBlueprint": {
+        "id": "27",
+        "uuid": "c3a03f8f-609a-46db-9744-a320770ab0c2",
+        "name": "Curation - Toggle automation flag from network IoC based on AbuseIPDB",
+        "description": "Using an enrichment module (AbuseIPDB), toggle the ids_flag for network IoCs and tag accordingly",
+        "timestamp": "1689267951",
+        "data": [
+            {
+                "id": 41,
+                "name": "Attach enrichment",
+                "data": {
+                    "indexed_params": {
+                        "modules": [
+                            "",
+                            "abuseipdb"
+                        ]
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "9h0cwso9v116iw",
+                    "module_type": "action",
+                    "id": "attach-enrichment",
+                    "name": "Attach enrichment",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.3",
+                    "module_version": "0.3"
+                },
+                "class": "block-type-default",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "60",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "44",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": -862,
+                "pos_y": 3072.6339652583856
+            },
+            {
+                "id": 42,
+                "name": "Attribute IDS Flag operation",
+                "data": {
+                    "indexed_params": {
+                        "action": "add"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "9jweeecyi1w0p7xrfd6556m",
+                    "module_type": "action",
+                    "id": "attribute_ids_flag_operation",
+                    "name": "Attribute IDS Flag operation",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.1",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "50",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "43",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 604,
+                "pos_y": 3040
+            },
+            {
+                "id": 43,
+                "name": "Tag operation",
+                "data": {
+                    "indexed_params": {
+                        "scope": "attribute",
+                        "action": "add",
+                        "locality": "local",
+                        "tags": [
+                            "curation:action-taken=\"ids-enabled\"",
+                            "curation:analysis=\"highly-likely-positive\"",
+                            "false-positive:risk=\"low\""
+                        ],
+                        "relationship_type": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "9keeeecyi1w0ple2wb4ejlc",
+                    "module_type": "action",
+                    "id": "tag_operation",
+                    "name": "Tag operation",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.2",
+                    "module_version": "0.2"
+                },
+                "class": "block-type-default",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "42",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "48",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 1056.5189167588544,
+                "pos_y": 2901
+            },
+            {
+                "id": 44,
+                "name": "Filter :: Generic",
+                "data": {
+                    "indexed_params": {
+                        "filtering-label": "B",
+                        "selector": "Event._AttributeFlattened.{n}",
+                        "value": "boolean",
+                        "operator": "in",
+                        "hash_path": "enrichment.{n}.Object.{n}[name=abuseipdb].Attribute.{n}[object_relation=is-malicious].type"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "9u0cbol0b9jot",
+                    "module_type": "logic",
+                    "id": "generic-filter-data",
+                    "name": "Filter :: Generic",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.1",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default block-type-logic",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "41",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "50",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": -418,
+                "pos_y": 2926.6339652583856
+            },
+            {
+                "id": 46,
+                "name": "Attribute IDS Flag operation",
+                "data": {
+                    "indexed_params": {
+                        "action": "remove"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "9vi0veynt53r05j",
+                    "module_type": "action",
+                    "id": "attribute_ids_flag_operation",
+                    "name": "Attribute IDS Flag operation",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.1",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "50",
+                                "input": "output_2"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "47",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 612,
+                "pos_y": 3518
+            },
+            {
+                "id": 47,
+                "name": "Tag operation",
+                "data": {
+                    "indexed_params": {
+                        "scope": "attribute",
+                        "action": "add",
+                        "locality": "local",
+                        "tags": [
+                            "curation:action-taken=\"ids-disabled\"",
+                            "curation:analysis=\"false-positive\"",
+                            "false-positive:risk=\"high\""
+                        ],
+                        "relationship_type": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "9vweeecyi1w0yhld64zyhi",
+                    "module_type": "action",
+                    "id": "tag_operation",
+                    "name": "Tag operation",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.2",
+                    "module_version": "0.2"
+                },
+                "class": "block-type-default",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "46",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "48",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 1058,
+                "pos_y": 3392
+            },
+            {
+                "id": 48,
+                "name": "Attribute comment operation",
+                "data": {
+                    "indexed_params": {
+                        "comment": "{% for objectAttribute in __currentAttribute.enrichment.0.Object.0.Attribute %}\n\t{% if objectAttribute.object_relation == \"is-malicious\" %}\n\t\t[Curation pipeline enrichment:abusipdb.is-malicious] `{{ objectAttribute.value }}`\n\t{% endif %}\n{% endfor %}"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "a3eeeecyi1w0x6bmq6orzc",
+                    "module_type": "action",
+                    "id": "Module_attribute_comment_operation",
+                    "name": "Attribute comment operation",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.1",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "47",
+                                "input": "output_1"
+                            },
+                            {
+                                "node": "43",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "58",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 1532,
+                "pos_y": 3290
+            },
+            {
+                "id": 50,
+                "name": "IF :: Generic",
+                "data": {
+                    "node_uid": "a409mw94yzbib",
+                    "indexed_params": {
+                        "value": "1",
+                        "operator": "in",
+                        "hash_path": "Event._AttributeFlattened.{n}.enrichment.{n}.Object.{n}[name=abuseipdb].Attribute.{n}[object_relation=is-malicious].value"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "module_type": "logic",
+                    "id": "generic-if",
+                    "name": "IF :: Generic",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.1",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-if block-type-logic",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "44",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "42",
+                                "output": "input_1"
+                            }
+                        ]
+                    },
+                    "output_2": {
+                        "connections": [
+                            {
+                                "node": "46",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 66,
+                "pos_y": 3014.6339652583856
+            },
+            {
+                "id": 58,
+                "name": "Filter :: Remove filter",
+                "data": {
+                    "indexed_params": {
+                        "filtering-label": "all"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "aassssrpvjf0krhhf54u1t",
+                    "module_type": "logic",
+                    "id": "generic-filter-reset",
+                    "name": "Filter :: Remove filter",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.1",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default block-type-logic",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "48",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": []
+                    }
+                },
+                "pos_x": 1973,
+                "pos_y": 3301
+            },
+            {
+                "id": 60,
+                "name": "Filter :: Generic",
+                "data": {
+                    "indexed_params": {
+                        "filtering-label": "A",
+                        "selector": "Event._AttributeFlattened.{n}",
+                        "value": "",
+                        "value_list": [
+                            "ip-src",
+                            "ip-dst",
+                            "hostname",
+                            "domain",
+                            "domain|ip"
+                        ],
+                        "operator": "in_or",
+                        "hash_path": "type"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "abasssrpvjf038naacts413",
+                    "module_type": "logic",
+                    "id": "generic-filter-data",
+                    "name": "Filter :: Generic",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.1",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default block-type-logic",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": []
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "41",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": -1322,
+                "pos_y": 2920.6339652583856
+            }
+        ],
+        "default": false,
+        "mermaid": "flowchart LR\n    41[\"fas:fa-asterisk  Attach enrichment\"] --> 44[/\"fas:fa-filter  Filter :: Generic\"/]\n    42[\"fas:fa-edit  Attribute IDS Flag operation\"] --> 43[\"fas:fa-tags  Tag operation\"]\n    43[\"fas:fa-tags  Tag operation\"] --> 48[\"fas:fa-edit  Attribute comment operation\"]\n    44[/\"fas:fa-filter  Filter :: Generic\"/] --> 50[/\"fas:fa-code-branch  IF :: Generic\"/]\n    46[\"fas:fa-edit  Attribute IDS Flag operation\"] --> 47[\"fas:fa-tags  Tag operation\"]\n    47[\"fas:fa-tags  Tag operation\"] --> 48[\"fas:fa-edit  Attribute comment operation\"]\n    48[\"fas:fa-edit  Attribute comment operation\"] --> 58[/\"fas:fa-redo-alt  Filter :: Remove filter\"/]\n    50[/\"fas:fa-code-branch  IF :: Generic\"/] --> 42[\"fas:fa-edit  Attribute IDS Flag operation\"]\n    50[/\"fas:fa-code-branch  IF :: Generic\"/] --> 46[\"fas:fa-edit  Attribute IDS Flag operation\"]\n    60[/\"fas:fa-filter  Filter :: Generic\"/] --> 41[\"fas:fa-asterisk  Attach enrichment\"]\n"
+    }
+}

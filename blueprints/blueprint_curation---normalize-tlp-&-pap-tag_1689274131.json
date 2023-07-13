@@ -1,0 +1,104 @@
+{
+    "WorkflowBlueprint": {
+        "id": "26",
+        "uuid": "0acf54da-ac75-4c5f-ad0c-c40da7977611",
+        "name": "Curation - Normalize TLP & PAP Tag",
+        "description": "Try to guess the TLP or PAP level from non-normalized tags and (potentially) replace them by their equivalent from the TLP or PAP taxonomy. Example: \"PAP--green\" becomes \"PAP:GREEN\"",
+        "timestamp": "1689267785",
+        "data": [
+            {
+                "id": 73,
+                "name": "Tag Replacement - PAP",
+                "data": {
+                    "node_uid": "c82c77776h900cen9aqjuk47",
+                    "indexed_params": {
+                        "scope": "event",
+                        "remove_substituted": "no",
+                        "locality": "local"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "module_type": "action",
+                    "id": "tag_replacement_pap",
+                    "name": "Tag Replacement - PAP",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.1",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "74",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": []
+                    }
+                },
+                "pos_x": -847.2900204710978,
+                "pos_y": 2300
+            },
+            {
+                "id": 74,
+                "name": "Tag Replacement - TLP",
+                "data": {
+                    "node_uid": "c82e77776h90ieft6qixjeh",
+                    "indexed_params": {
+                        "scope": "event",
+                        "remove_substituted": "no",
+                        "locality": "local"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "module_type": "action",
+                    "id": "tag_replacement_tlp",
+                    "name": "Tag Replacement - TLP",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "0.1",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "1",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "73",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": -1302,
+                "pos_y": 2300
+            }
+        ],
+        "default": false,
+        "mermaid": "flowchart LR\n    74[\"fas:fa-tags  Tag Replacement - TLP\"] --> 73[\"fas:fa-tags  Tag Replacement - PAP\"]\n"
+    }
+}
