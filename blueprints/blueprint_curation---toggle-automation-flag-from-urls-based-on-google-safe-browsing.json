@@ -3,11 +3,11 @@
         "id": "28",
         "uuid": "bf8b766a-f800-43dd-9bd4-e6ebe02cfdd9",
         "name": "Curation - Toggle automation flag from URLs based on Google-Safe-Browsing",
-        "description": "Using an enrichment module (google-safe-browsing), toggle the ids_flag for network URLs and tag accordingly",
+        "description": "Using an enrichment module (google-safe-browsing), toggle the ids_flag for network URLs if the tag `curation:mutability=\"allowed\"` is attached. Tag accordingly in both cases.",
         "timestamp": "1689268231",
         "data": [
             {
-                "id": 62,
+                "id": 64,
                 "name": "Attach enrichment",
                 "data": {
                     "indexed_params": {
@@ -22,21 +22,21 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "aci0w0ki82lk40g",
+                    "node_uid": "1c04sssspx083qdi7c9ewt",
                     "module_type": "action",
                     "id": "attach-enrichment",
                     "name": "Attach enrichment",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.3",
+                    "previous_module_version": "?",
                     "module_version": "0.3"
                 },
-                "class": "block-type-default",
+                "class": "block-type-default expect-misp-core-format",
                 "typenode": false,
                 "inputs": {
                     "input_1": {
                         "connections": [
                             {
-                                "node": "71",
+                                "node": "73",
                                 "input": "output_1"
                             }
                         ]
@@ -46,17 +46,17 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "65",
+                                "node": "67",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": -857,
-                "pos_y": 4510
+                "pos_x": 1216.4969282156617,
+                "pos_y": 869.2408347664507
             },
             {
-                "id": 63,
+                "id": 65,
                 "name": "Attribute IDS Flag operation",
                 "data": {
                     "indexed_params": {
@@ -68,22 +68,22 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "af77776h910r41qrb7v4rg",
+                    "node_uid": "1c0s77772vi0qy0qehrx5gq",
                     "module_type": "action",
                     "id": "attribute_ids_flag_operation",
                     "name": "Attribute IDS Flag operation",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
+                    "previous_module_version": "?",
                     "module_version": "0.1"
                 },
-                "class": "block-type-default",
+                "class": "block-type-default expect-misp-core-format",
                 "typenode": false,
                 "inputs": {
                     "input_1": {
                         "connections": [
                             {
-                                "node": "69",
-                                "input": "output_1"
+                                "node": "74",
+                                "input": "output_2"
                             }
                         ]
                     }
@@ -92,27 +92,27 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "64",
+                                "node": "66",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": 566,
-                "pos_y": 4483
+                "pos_x": 3161,
+                "pos_y": 614
             },
             {
-                "id": 64,
+                "id": 66,
                 "name": "Tag operation",
                 "data": {
                     "indexed_params": {
                         "scope": "attribute",
                         "action": "add",
-                        "locality": "local",
+                        "locality": "global",
                         "tags": [
-                            "curation:action-taken=\"ids-enabled\"",
-                            "curation:analysis=\"highly-likely-positive\"",
-                            "false-positive:risk=\"low\""
+                            "false-positive:risk=\"low\"",
+                            "misp-workflow:action-taken=\"ids-flag-added\"",
+                            "misp-workflow:analysis=\"highly-likely-positive\""
                         ],
                         "relationship_type": ""
                     },
@@ -122,21 +122,21 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "aflllll8mih0a283r4n8ck6",
+                    "node_uid": "1c0tsssspx0dw9nnk52ogf",
                     "module_type": "action",
                     "id": "tag_operation",
                     "name": "Tag operation",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.2",
+                    "previous_module_version": "?",
                     "module_version": "0.2"
                 },
-                "class": "block-type-default",
+                "class": "block-type-default expect-misp-core-format",
                 "typenode": false,
                 "inputs": {
                     "input_1": {
                         "connections": [
                             {
-                                "node": "63",
+                                "node": "65",
                                 "input": "output_1"
                             }
                         ]
@@ -146,17 +146,17 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "68",
+                                "node": "70",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": 1021,
-                "pos_y": 4344
+                "pos_x": 3612,
+                "pos_y": 448
             },
             {
-                "id": 65,
+                "id": 67,
                 "name": "Filter :: Generic",
                 "data": {
                     "indexed_params": {
@@ -173,13 +173,13 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "ao00zxmtr1uxxvg",
+                    "node_uid": "1c1ollllfu0ivc42v0zku",
                     "module_type": "logic",
                     "id": "generic-filter-data",
                     "name": "Filter :: Generic",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
-                    "module_version": "0.1"
+                    "previous_module_version": "?",
+                    "module_version": "0.2"
                 },
                 "class": "block-type-default block-type-logic",
                 "typenode": false,
@@ -187,7 +187,7 @@
                     "input_1": {
                         "connections": [
                             {
-                                "node": "62",
+                                "node": "64",
                                 "input": "output_1"
                             }
                         ]
@@ -197,17 +197,17 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "69",
+                                "node": "71",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": -413,
-                "pos_y": 4364
+                "pos_x": 1660.4969282156617,
+                "pos_y": 723.2408347664507
             },
             {
-                "id": 66,
+                "id": 68,
                 "name": "Attribute IDS Flag operation",
                 "data": {
                     "indexed_params": {
@@ -219,22 +219,22 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "apssssrpvjf0s03f9mdup0e",
+                    "node_uid": "1c1zllllfu0g9p8uxha0j",
                     "module_type": "action",
                     "id": "attribute_ids_flag_operation",
                     "name": "Attribute IDS Flag operation",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
+                    "previous_module_version": "?",
                     "module_version": "0.1"
                 },
-                "class": "block-type-default",
+                "class": "block-type-default expect-misp-core-format",
                 "typenode": false,
                 "inputs": {
                     "input_1": {
                         "connections": [
                             {
-                                "node": "69",
-                                "input": "output_2"
+                                "node": "75",
+                                "input": "output_1"
                             }
                         ]
                     }
@@ -243,27 +243,27 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "67",
+                                "node": "69",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": 564,
-                "pos_y": 4926
+                "pos_x": 3158.4969282156626,
+                "pos_y": 1095.2408347664507
             },
             {
-                "id": 67,
+                "id": 69,
                 "name": "Tag operation",
                 "data": {
                     "indexed_params": {
                         "scope": "attribute",
                         "action": "add",
-                        "locality": "local",
+                        "locality": "global",
                         "tags": [
-                            "curation:action-taken=\"ids-disabled\"",
-                            "curation:analysis=\"false-positive\"",
-                            "false-positive:risk=\"high\""
+                            "false-positive:risk=\"high\"",
+                            "misp-workflow:action-taken=\"ids-flag-removed\"",
+                            "misp-workflow:analysis=\"false-positive\""
                         ],
                         "relationship_type": ""
                     },
@@ -273,71 +273,21 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "aqasssrpvjf0t3v3axgx1oa",
+                    "node_uid": "1c22p7772vi0pgmqlrcw9s",
                     "module_type": "action",
                     "id": "tag_operation",
                     "name": "Tag operation",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.2",
+                    "previous_module_version": "?",
                     "module_version": "0.2"
                 },
-                "class": "block-type-default",
+                "class": "block-type-default expect-misp-core-format",
                 "typenode": false,
                 "inputs": {
                     "input_1": {
-                        "connections": [
-                            {
-                                "node": "66",
-                                "input": "output_1"
-                            }
-                        ]
-                    }
-                },
-                "outputs": {
-                    "output_1": {
                         "connections": [
                             {
                                 "node": "68",
-                                "output": "input_1"
-                            }
-                        ]
-                    }
-                },
-                "pos_x": 1020,
-                "pos_y": 4800
-            },
-            {
-                "id": 68,
-                "name": "Attribute comment operation",
-                "data": {
-                    "indexed_params": {
-                        "comment": "{% for objectAttribute in __currentAttribute.enrichment.0.Object.0.Attribute %}\n\t{% if objectAttribute.object_relation == \"malicious\" %}\n\t\t[Curation pipeline enrichment:google-safe-browsing.malicious] `{{ objectAttribute.value }}`\n\t{% endif %}\n{% endfor %}"
-                    },
-                    "saved_filters": {
-                        "selector": "",
-                        "value": "",
-                        "operator": "",
-                        "path": ""
-                    },
-                    "node_uid": "axlllll8mih01wa9f1gz05q",
-                    "module_type": "action",
-                    "id": "Module_attribute_comment_operation",
-                    "name": "Attribute comment operation",
-                    "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
-                    "module_version": "0.1"
-                },
-                "class": "block-type-default",
-                "typenode": false,
-                "inputs": {
-                    "input_1": {
-                        "connections": [
-                            {
-                                "node": "64",
-                                "input": "output_1"
-                            },
-                            {
-                                "node": "67",
                                 "input": "output_1"
                             }
                         ]
@@ -353,11 +303,61 @@
                         ]
                     }
                 },
-                "pos_x": 1497,
-                "pos_y": 4713
+                "pos_x": 3616,
+                "pos_y": 950
             },
             {
-                "id": 69,
+                "id": 70,
+                "name": "Attribute comment operation",
+                "data": {
+                    "indexed_params": {
+                        "comment": "{% for objectAttribute in __currentAttribute.enrichment.0.Object.0.Attribute %}\n\t{% if objectAttribute.object_relation == \"malicious\" %}\n\t\t[Curation pipeline enrichment:google-safe-browsing.malicious] `{{ objectAttribute.value }}`\n\t{% endif %}\n{% endfor %}"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "1c2tassspx0q01pteaj7rh",
+                    "module_type": "action",
+                    "id": "Module_attribute_comment_operation",
+                    "name": "Attribute comment operation",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "66",
+                                "input": "output_1"
+                            },
+                            {
+                                "node": "69",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "72",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 4003.4969282156617,
+                "pos_y": 872.2408347664507
+            },
+            {
+                "id": 71,
                 "name": "IF :: Generic",
                 "data": {
                     "indexed_params": {
@@ -372,13 +372,13 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "axweeecyi1w0pc7wwsuhlm",
+                    "node_uid": "1c2yp7772vi0gut7ca8y5cw",
                     "module_type": "logic",
                     "id": "generic-if",
                     "name": "IF :: Generic",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
-                    "module_version": "0.1"
+                    "previous_module_version": "?",
+                    "module_version": "0.2"
                 },
                 "class": "block-type-if block-type-logic",
                 "typenode": false,
@@ -386,7 +386,7 @@
                     "input_1": {
                         "connections": [
                             {
-                                "node": "65",
+                                "node": "67",
                                 "input": "output_1"
                             }
                         ]
@@ -396,7 +396,7 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "63",
+                                "node": "74",
                                 "output": "input_1"
                             }
                         ]
@@ -404,17 +404,17 @@
                     "output_2": {
                         "connections": [
                             {
-                                "node": "66",
+                                "node": "75",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": 71,
-                "pos_y": 4452
+                "pos_x": 2090.4969282156617,
+                "pos_y": 814.3478843748055
             },
             {
-                "id": 70,
+                "id": 72,
                 "name": "Filter :: Remove filter",
                 "data": {
                     "indexed_params": {
@@ -426,12 +426,12 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "ayssssrpvjf0zqj77uowy4",
+                    "node_uid": "1c3d0fhxxzjguqru",
                     "module_type": "logic",
                     "id": "generic-filter-reset",
                     "name": "Filter :: Remove filter",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
+                    "previous_module_version": "?",
                     "module_version": "0.1"
                 },
                 "class": "block-type-default block-type-logic",
@@ -440,7 +440,15 @@
                     "input_1": {
                         "connections": [
                             {
-                                "node": "68",
+                                "node": "70",
+                                "input": "output_1"
+                            },
+                            {
+                                "node": "76",
+                                "input": "output_1"
+                            },
+                            {
+                                "node": "77",
                                 "input": "output_1"
                             }
                         ]
@@ -451,11 +459,11 @@
                         "connections": []
                     }
                 },
-                "pos_x": 1938,
-                "pos_y": 4724
+                "pos_x": 4468.496928215662,
+                "pos_y": 885.2408347664511
             },
             {
-                "id": 71,
+                "id": 73,
                 "name": "Filter :: Generic",
                 "data": {
                     "indexed_params": {
@@ -474,21 +482,67 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "azlllll8mih0e38w3czz1n",
+                    "node_uid": "1c3i77772vi0yoiovmuijr",
                     "module_type": "logic",
                     "id": "generic-filter-data",
                     "name": "Filter :: Generic",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
-                    "module_version": "0.1"
+                    "previous_module_version": "?",
+                    "module_version": "0.2"
                 },
                 "class": "block-type-default block-type-logic",
                 "typenode": false,
                 "inputs": {
                     "input_1": {
+                        "connections": []
+                    }
+                },
+                "outputs": {
+                    "output_1": {
                         "connections": [
                             {
-                                "node": "1",
+                                "node": "64",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 765.4969282156617,
+                "pos_y": 729.2408347664511
+            },
+            {
+                "id": 74,
+                "name": "IF :: Tag",
+                "data": {
+                    "indexed_params": {
+                        "scope": "event_attribute",
+                        "condition": "not_in_or",
+                        "tags": [
+                            "misp-workflow:mutability=\"allowed\""
+                        ],
+                        "clusters": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "1c3tweeecyi071rxlgxlc9q",
+                    "module_type": "logic",
+                    "id": "tag-if",
+                    "name": "IF :: Tag",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.4"
+                },
+                "class": "block-type-if block-type-logic expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "71",
                                 "input": "output_1"
                             }
                         ]
@@ -498,17 +552,190 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "62",
+                                "node": "76",
+                                "output": "input_1"
+                            }
+                        ]
+                    },
+                    "output_2": {
+                        "connections": [
+                            {
+                                "node": "65",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": -1308,
-                "pos_y": 4370
+                "pos_x": 2547,
+                "pos_y": 539
+            },
+            {
+                "id": 75,
+                "name": "IF :: Tag",
+                "data": {
+                    "indexed_params": {
+                        "scope": "event_attribute",
+                        "condition": "not_in_or",
+                        "tags": [
+                            "misp-workflow:mutability=\"allowed\""
+                        ],
+                        "clusters": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "1c4k0novy1mbg13",
+                    "module_type": "logic",
+                    "id": "tag-if",
+                    "name": "IF :: Tag",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.4"
+                },
+                "class": "block-type-if block-type-logic expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "71",
+                                "input": "output_2"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "68",
+                                "output": "input_1"
+                            }
+                        ]
+                    },
+                    "output_2": {
+                        "connections": [
+                            {
+                                "node": "77",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 2546.4969282156617,
+                "pos_y": 1040.2408347664507
+            },
+            {
+                "id": 76,
+                "name": "Tag operation",
+                "data": {
+                    "indexed_params": {
+                        "scope": "attribute",
+                        "action": "add",
+                        "locality": "local",
+                        "tags": [
+                            "false-positive:risk=\"low\"",
+                            "misp-workflow:analysis=\"highly-likely-positive\""
+                        ],
+                        "relationship_type": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "1c5eeeeecyi0fh9rrhfvinu",
+                    "module_type": "action",
+                    "id": "tag_operation",
+                    "name": "Tag operation",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.2"
+                },
+                "class": "block-type-default expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "74",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "72",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 3612,
+                "pos_y": -19
+            },
+            {
+                "id": 77,
+                "name": "Tag operation",
+                "data": {
+                    "indexed_params": {
+                        "scope": "attribute",
+                        "action": "add",
+                        "locality": "local",
+                        "tags": [
+                            "false-positive:risk=\"high\"",
+                            "misp-workflow:analysis=\"false-positive\""
+                        ],
+                        "relationship_type": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "1c66weeecyi05khda4m0j5c",
+                    "module_type": "action",
+                    "id": "tag_operation",
+                    "name": "Tag operation",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.2"
+                },
+                "class": "block-type-default expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "75",
+                                "input": "output_2"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "72",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 3617,
+                "pos_y": 1406.4310260707152
             }
         ],
         "default": false,
-        "mermaid": "flowchart LR\n    62[\"fas:fa-asterisk  Attach enrichment\"] --> 65[/\"fas:fa-filter  Filter :: Generic\"/]\n    63[\"fas:fa-edit  Attribute IDS Flag operation\"] --> 64[\"fas:fa-tags  Tag operation\"]\n    64[\"fas:fa-tags  Tag operation\"] --> 68[\"fas:fa-edit  Attribute comment operation\"]\n    65[/\"fas:fa-filter  Filter :: Generic\"/] --> 69[/\"fas:fa-code-branch  IF :: Generic\"/]\n    66[\"fas:fa-edit  Attribute IDS Flag operation\"] --> 67[\"fas:fa-tags  Tag operation\"]\n    67[\"fas:fa-tags  Tag operation\"] --> 68[\"fas:fa-edit  Attribute comment operation\"]\n    68[\"fas:fa-edit  Attribute comment operation\"] --> 70[/\"fas:fa-redo-alt  Filter :: Remove filter\"/]\n    69[/\"fas:fa-code-branch  IF :: Generic\"/] --> 63[\"fas:fa-edit  Attribute IDS Flag operation\"]\n    69[/\"fas:fa-code-branch  IF :: Generic\"/] --> 66[\"fas:fa-edit  Attribute IDS Flag operation\"]\n    71[/\"fas:fa-filter  Filter :: Generic\"/] --> 62[\"fas:fa-asterisk  Attach enrichment\"]\n"
+        "mermaid": "flowchart LR\n    65[\"fas:fa-edit  Attribute IDS Flag operation\"] --> 66[\"fas:fa-tags  Tag operation\"]\n    66[\"fas:fa-tags  Tag operation\"] --> 70[\"fas:fa-edit  Attribute comment operation\"]\n    67[/\"fas:fa-filter  Filter :: Generic\"/] --> 71[/\"fas:fa-code-branch  IF :: Generic\"/]\n    68[\"fas:fa-edit  Attribute IDS Flag operation\"] --> 69[\"fas:fa-tags  Tag operation\"]\n    69[\"fas:fa-tags  Tag operation\"] --> 70[\"fas:fa-edit  Attribute comment operation\"]\n    70[\"fas:fa-edit  Attribute comment operation\"] --> 72[/\"fas:fa-redo-alt  Filter :: Remove filter\"/]\n    71[/\"fas:fa-code-branch  IF :: Generic\"/] --> 74[/\"fas:fa-code-branch  IF :: Tag\"/]\n    71[/\"fas:fa-code-branch  IF :: Generic\"/] --> 75[/\"fas:fa-code-branch  IF :: Tag\"/]\n    74[/\"fas:fa-code-branch  IF :: Tag\"/] --> 76[\"fas:fa-tags  Tag operation\"]\n    74[/\"fas:fa-code-branch  IF :: Tag\"/] --> 65[\"fas:fa-edit  Attribute IDS Flag operation\"]\n    75[/\"fas:fa-code-branch  IF :: Tag\"/] --> 68[\"fas:fa-edit  Attribute IDS Flag operation\"]\n    75[/\"fas:fa-code-branch  IF :: Tag\"/] --> 77[\"fas:fa-tags  Tag operation\"]\n    76[\"fas:fa-tags  Tag operation\"] --> 72[/\"fas:fa-redo-alt  Filter :: Remove filter\"/]\n    77[\"fas:fa-tags  Tag operation\"] --> 72[/\"fas:fa-redo-alt  Filter :: Remove filter\"/]\n"
     }
 }

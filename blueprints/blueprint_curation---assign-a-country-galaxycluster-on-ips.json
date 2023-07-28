@@ -7,7 +7,7 @@
         "timestamp": "1689083255",
         "data": [
             {
-                "id": 21,
+                "id": 16,
                 "name": "Attach enrichment",
                 "data": {
                     "indexed_params": {
@@ -22,21 +22,21 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "c7yelllll8n0e3ivvp542ra",
+                    "node_uid": "23spllllfu01rct6zbd2wih",
                     "module_type": "action",
                     "id": "attach-enrichment",
                     "name": "Attach enrichment",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.3",
+                    "previous_module_version": "?",
                     "module_version": "0.3"
                 },
-                "class": "block-type-default",
+                "class": "block-type-default expect-misp-core-format",
                 "typenode": false,
                 "inputs": {
                     "input_1": {
                         "connections": [
                             {
-                                "node": "75",
+                                "node": "20",
                                 "input": "output_1"
                             }
                         ]
@@ -46,21 +46,21 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "22",
+                                "node": "17",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": -1222.7976114515488,
-                "pos_y": 109
+                "pos_x": -646.7039502299574,
+                "pos_y": 1356.4238392223008
             },
             {
-                "id": 22,
+                "id": 17,
                 "name": "Filter :: Generic",
                 "data": {
                     "indexed_params": {
-                        "filtering-label": "C",
+                        "filtering-label": "B",
                         "selector": "Event._AttributeFlattened.{n}",
                         "value": "geolocation",
                         "operator": "in",
@@ -72,15 +72,65 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "c7yhweeecyi0avck7kp1kwm",
+                    "node_uid": "23t83lllfu00ylcicdkukb",
                     "module_type": "logic",
                     "id": "generic-filter-data",
                     "name": "Filter :: Generic",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
-                    "module_version": "0.1"
+                    "previous_module_version": "?",
+                    "module_version": "0.2"
                 },
                 "class": "block-type-default block-type-logic",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "16",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "21",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": -220.70395022995808,
+                "pos_y": 1211.4238392223008
+            },
+            {
+                "id": 18,
+                "name": "Assign country",
+                "data": {
+                    "indexed_params": {
+                        "scope": "attribute",
+                        "hash_path": "enrichment.{n}.Object.0.Attribute.{n}[object_relation=country].value",
+                        "locality": "global",
+                        "galaxy_name": "",
+                        "relationship_type": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "23te0l77bzpy5e8",
+                    "module_type": "action",
+                    "id": "assign_country",
+                    "name": "Assign country",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.2"
+                },
+                "class": "block-type-default expect-misp-core-format",
                 "typenode": false,
                 "inputs": {
                     "input_1": {
@@ -96,67 +146,17 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "23",
+                                "node": "19",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": -796.7976114515488,
-                "pos_y": -36
+                "pos_x": 693.4507351104521,
+                "pos_y": 1062.1994215660343
             },
             {
-                "id": 23,
-                "name": "Assign country",
-                "data": {
-                    "indexed_params": {
-                        "scope": "attribute",
-                        "hash_path": "enrichment.{n}.Object.0.Attribute.{n}[object_relation=country].value",
-                        "locality": "local",
-                        "galaxy_name": "",
-                        "relationship_type": ""
-                    },
-                    "saved_filters": {
-                        "selector": "",
-                        "value": "",
-                        "operator": "",
-                        "path": ""
-                    },
-                    "node_uid": "c7yj3llll8n05vet85upoae",
-                    "module_type": "action",
-                    "id": "assign_country",
-                    "name": "Assign country",
-                    "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
-                    "module_version": "0.1"
-                },
-                "class": "block-type-default",
-                "typenode": false,
-                "inputs": {
-                    "input_1": {
-                        "connections": [
-                            {
-                                "node": "22",
-                                "input": "output_1"
-                            }
-                        ]
-                    }
-                },
-                "outputs": {
-                    "output_1": {
-                        "connections": [
-                            {
-                                "node": "55",
-                                "output": "input_1"
-                            }
-                        ]
-                    }
-                },
-                "pos_x": -327.79761145154885,
-                "pos_y": -3
-            },
-            {
-                "id": 55,
+                "id": 19,
                 "name": "Filter :: Remove filter",
                 "data": {
                     "indexed_params": {
@@ -168,12 +168,12 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "c812eeeecyi0sz85s8edsi",
+                    "node_uid": "23tii0c26rtkrkdcp",
                     "module_type": "logic",
                     "id": "generic-filter-reset",
                     "name": "Filter :: Remove filter",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
+                    "previous_module_version": "?",
                     "module_version": "0.1"
                 },
                 "class": "block-type-default block-type-logic",
@@ -182,7 +182,11 @@
                     "input_1": {
                         "connections": [
                             {
-                                "node": "23",
+                                "node": "18",
+                                "input": "output_1"
+                            },
+                            {
+                                "node": "22",
                                 "input": "output_1"
                             }
                         ]
@@ -193,11 +197,11 @@
                         "connections": []
                     }
                 },
-                "pos_x": 91.90148387144593,
-                "pos_y": 104
+                "pos_x": 1151.4507351104521,
+                "pos_y": 1361.4620027265223
             },
             {
-                "id": 75,
+                "id": 20,
                 "name": "Filter :: Generic",
                 "data": {
                     "indexed_params": {
@@ -219,13 +223,13 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "c82fi0pkngs8yl3lc",
+                    "node_uid": "23tlllllfu01x6pcf13we6",
                     "module_type": "logic",
                     "id": "generic-filter-data",
                     "name": "Filter :: Generic",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
-                    "module_version": "0.1"
+                    "previous_module_version": "?",
+                    "module_version": "0.2"
                 },
                 "class": "block-type-default block-type-logic",
                 "typenode": false,
@@ -238,17 +242,126 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "21",
+                                "node": "16",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": -1631,
-                "pos_y": -45
+                "pos_x": -1054.9063387784088,
+                "pos_y": 1202.4238392223008
+            },
+            {
+                "id": 21,
+                "name": "IF :: Tag",
+                "data": {
+                    "indexed_params": {
+                        "scope": "event",
+                        "condition": "in_or",
+                        "tags": [
+                            "misp-workflow:mutability=\"allowed\""
+                        ],
+                        "clusters": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "23tsweeecyi0q18dszjwe6h",
+                    "module_type": "logic",
+                    "id": "tag-if",
+                    "name": "IF :: Tag",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.4"
+                },
+                "class": "block-type-if block-type-logic expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "17",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "18",
+                                "output": "input_1"
+                            }
+                        ]
+                    },
+                    "output_2": {
+                        "connections": [
+                            {
+                                "node": "22",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 192.45073511045211,
+                "pos_y": 1278.9628939921195
+            },
+            {
+                "id": 22,
+                "name": "Assign country",
+                "data": {
+                    "indexed_params": {
+                        "scope": "attribute",
+                        "hash_path": "enrichment.{n}.Object.0.Attribute.{n}[object_relation=country].value",
+                        "locality": "local",
+                        "galaxy_name": "",
+                        "relationship_type": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "23uhi0n6ccq0wctts",
+                    "module_type": "action",
+                    "id": "assign_country",
+                    "name": "Assign country",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.2"
+                },
+                "class": "block-type-default expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "21",
+                                "input": "output_2"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "19",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 696.2142075365373,
+                "pos_y": 1439.9628939921195
             }
         ],
         "default": false,
-        "mermaid": "flowchart LR\n    21[\"fas:fa-asterisk  Attach enrichment\"] --> 22[/\"fas:fa-filter  Filter :: Generic\"/]\n    22[/\"fas:fa-filter  Filter :: Generic\"/] --> 23[\"fas:fa-globe  Assign country\"]\n    23[\"fas:fa-globe  Assign country\"] --> 55[/\"fas:fa-redo-alt  Filter :: Remove filter\"/]\n    75[/\"fas:fa-filter  Filter :: Generic\"/] --> 21[\"fas:fa-asterisk  Attach enrichment\"]\n"
+        "mermaid": "flowchart LR\n    17[/\"fas:fa-filter  Filter :: Generic\"/] --> 21[/\"fas:fa-code-branch  IF :: Tag\"/]\n    18[\"fas:fa-globe  Assign country\"] --> 19[/\"fas:fa-redo-alt  Filter :: Remove filter\"/]\n    21[/\"fas:fa-code-branch  IF :: Tag\"/] --> 18[\"fas:fa-globe  Assign country\"]\n    21[/\"fas:fa-code-branch  IF :: Tag\"/] --> 22[\"fas:fa-globe  Assign country\"]\n    22[\"fas:fa-globe  Assign country\"] --> 19[/\"fas:fa-redo-alt  Filter :: Remove filter\"/]\n"
     }
 }

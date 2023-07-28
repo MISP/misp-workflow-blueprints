@@ -3,11 +3,11 @@
         "id": "24",
         "uuid": "9bebd5d0-935b-4a8e-a902-f36e02497802",
         "name": "Curation - Remove automation flag from data having correlation with predefined feed",
-        "description": "Using existing correlation with feeds, disable the ids_flag for attribute having a hit on the `TOR exit nodes` feed (or any other feeds).",
+        "description": "Using correlation with feeds, disable the ids_flag for attribute having a hit on the selected feed if the tag `curation:mutability=\"allowed\"` is attached. Tag accordingly in both cases.",
         "timestamp": "1689107183",
         "data": [
             {
-                "id": 38,
+                "id": 39,
                 "name": "Filter :: Generic",
                 "data": {
                     "indexed_params": {
@@ -23,13 +23,13 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "c7zt08vdwc4q6xzw",
+                    "node_uid": "5ptsllllfu0aeex0tvlv3d",
                     "module_type": "logic",
                     "id": "generic-filter-data",
                     "name": "Filter :: Generic",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
-                    "module_version": "0.1"
+                    "previous_module_version": "?",
+                    "module_version": "0.2"
                 },
                 "class": "block-type-default block-type-logic",
                 "typenode": false,
@@ -42,17 +42,17 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "39",
+                                "node": "43",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": -792.9253645525547,
-                "pos_y": 1524
+                "pos_x": -323.24629350142027,
+                "pos_y": 1342.1948797052553
             },
             {
-                "id": 39,
+                "id": 40,
                 "name": "Attribute IDS Flag operation",
                 "data": {
                     "indexed_params": {
@@ -64,21 +64,21 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "c7zu77776h90ibphe4z3ghm",
+                    "node_uid": "5pu70elwlhoq8uzu",
                     "module_type": "action",
                     "id": "attribute_ids_flag_operation",
                     "name": "Attribute IDS Flag operation",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
+                    "previous_module_version": "?",
                     "module_version": "0.1"
                 },
-                "class": "block-type-default",
+                "class": "block-type-default expect-misp-core-format",
                 "typenode": false,
                 "inputs": {
                     "input_1": {
                         "connections": [
                             {
-                                "node": "38",
+                                "node": "43",
                                 "input": "output_1"
                             }
                         ]
@@ -88,27 +88,27 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "40",
+                                "node": "41",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": -338,
-                "pos_y": 1653
+                "pos_x": 500.7537064985795,
+                "pos_y": 1303.1948797052555
             },
             {
-                "id": 40,
+                "id": 41,
                 "name": "Tag operation",
                 "data": {
                     "indexed_params": {
                         "scope": "attribute",
                         "action": "add",
-                        "locality": "local",
+                        "locality": "global",
                         "tags": [
-                            "curation:action-taken=\"ids-disabled\"",
-                            "curation:analysis=\"false-positive\"",
-                            "false-positive:risk=\"medium\""
+                            "false-positive:risk=\"medium\"",
+                            "misp-workflow:action-taken=\"ids-flag-removed\"",
+                            "misp-workflow:analysis=\"false-positive\""
                         ],
                         "relationship_type": ""
                     },
@@ -118,15 +118,111 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "c7zulllll8n0ys67zst8ld",
+                    "node_uid": "5pu9eeeecyi0gj3yjstjv",
                     "module_type": "action",
                     "id": "tag_operation",
                     "name": "Tag operation",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.2",
+                    "previous_module_version": "?",
                     "module_version": "0.2"
                 },
-                "class": "block-type-default",
+                "class": "block-type-default expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "40",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "42",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 972.7537064985797,
+                "pos_y": 1162.1948797052555
+            },
+            {
+                "id": 42,
+                "name": "Filter :: Remove filter",
+                "data": {
+                    "indexed_params": {
+                        "filtering-label": "all"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "5puqeeeecyi0dpyhib52yb5",
+                    "module_type": "logic",
+                    "id": "generic-filter-reset",
+                    "name": "Filter :: Remove filter",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default block-type-logic",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "41",
+                                "input": "output_1"
+                            },
+                            {
+                                "node": "44",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": []
+                    }
+                },
+                "pos_x": 1374.7537064985797,
+                "pos_y": 1516.1948797052553
+            },
+            {
+                "id": 43,
+                "name": "IF :: Tag",
+                "data": {
+                    "indexed_params": {
+                        "scope": "event_attribute",
+                        "condition": "in_or",
+                        "tags": [
+                            "misp-workflow:mutability=\"allowed\""
+                        ],
+                        "clusters": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "5pussssspx0ftlvrwsf3t",
+                    "module_type": "logic",
+                    "id": "tag-if",
+                    "name": "IF :: Tag",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.4"
+                },
+                "class": "block-type-if block-type-logic expect-misp-core-format",
                 "typenode": false,
                 "inputs": {
                     "input_1": {
@@ -142,21 +238,36 @@
                     "output_1": {
                         "connections": [
                             {
-                                "node": "57",
+                                "node": "40",
+                                "output": "input_1"
+                            }
+                        ]
+                    },
+                    "output_2": {
+                        "connections": [
+                            {
+                                "node": "44",
                                 "output": "input_1"
                             }
                         ]
                     }
                 },
-                "pos_x": 134,
-                "pos_y": 1512
+                "pos_x": 54.75370649857973,
+                "pos_y": 1406.9781107891
             },
             {
-                "id": 57,
-                "name": "Filter :: Remove filter",
+                "id": 44,
+                "name": "Tag operation",
                 "data": {
                     "indexed_params": {
-                        "filtering-label": "all"
+                        "scope": "attribute",
+                        "action": "add",
+                        "locality": "local",
+                        "tags": [
+                            "false-positive:risk=\"medium\"",
+                            "misp-workflow:analysis=\"false-positive\""
+                        ],
+                        "relationship_type": ""
                     },
                     "saved_filters": {
                         "selector": "",
@@ -164,36 +275,41 @@
                         "operator": "",
                         "path": ""
                     },
-                    "node_uid": "c814lllll8n0ds1e2yty72w",
-                    "module_type": "logic",
-                    "id": "generic-filter-reset",
-                    "name": "Filter :: Remove filter",
+                    "node_uid": "5pvf3lllfu0vgogmy1q1g",
+                    "module_type": "action",
+                    "id": "tag_operation",
+                    "name": "Tag operation",
                     "multiple_output_connection": false,
-                    "previous_module_version": "0.1",
-                    "module_version": "0.1"
+                    "previous_module_version": "?",
+                    "module_version": "0.2"
                 },
-                "class": "block-type-default block-type-logic",
+                "class": "block-type-default expect-misp-core-format",
                 "typenode": false,
                 "inputs": {
                     "input_1": {
                         "connections": [
                             {
-                                "node": "40",
-                                "input": "output_1"
+                                "node": "43",
+                                "input": "output_2"
                             }
                         ]
                     }
                 },
                 "outputs": {
                     "output_1": {
-                        "connections": []
+                        "connections": [
+                            {
+                                "node": "42",
+                                "output": "input_1"
+                            }
+                        ]
                     }
                 },
-                "pos_x": 573,
-                "pos_y": 1664
+                "pos_x": 975.7537064985797,
+                "pos_y": 1638.1948797052553
             }
         ],
         "default": false,
-        "mermaid": "flowchart LR\n    38[/\"fas:fa-filter  Filter :: Generic\"/] --> 39[\"fas:fa-edit  Attribute IDS Flag operation\"]\n    39[\"fas:fa-edit  Attribute IDS Flag operation\"] --> 40[\"fas:fa-tags  Tag operation\"]\n    40[\"fas:fa-tags  Tag operation\"] --> 57[/\"fas:fa-redo-alt  Filter :: Remove filter\"/]\n"
+        "mermaid": "flowchart LR\n    40[\"fas:fa-edit  Attribute IDS Flag operation\"] --> 41[\"fas:fa-tags  Tag operation\"]\n    41[\"fas:fa-tags  Tag operation\"] --> 42[/\"fas:fa-redo-alt  Filter :: Remove filter\"/]\n    43[/\"fas:fa-code-branch  IF :: Tag\"/] --> 40[\"fas:fa-edit  Attribute IDS Flag operation\"]\n    43[/\"fas:fa-code-branch  IF :: Tag\"/] --> 44[\"fas:fa-tags  Tag operation\"]\n    44[\"fas:fa-tags  Tag operation\"] --> 42[/\"fas:fa-redo-alt  Filter :: Remove filter\"/]\n"
     }
 }

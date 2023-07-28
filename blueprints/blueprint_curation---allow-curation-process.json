@@ -1,0 +1,56 @@
+{
+    "WorkflowBlueprint": {
+        "id": "30",
+        "uuid": "19be89c7-58ca-40c4-9e42-a4fd8aa0e6d7",
+        "name": "Curation - Allow curation process",
+        "description": "Allow running the curation process if an event is tagged with the appropriate tag",
+        "timestamp": "1690446130",
+        "data": [
+            {
+                "id": 78,
+                "name": "IF :: Tag",
+                "data": {
+                    "indexed_params": {
+                        "scope": "event",
+                        "condition": "in_or",
+                        "tags": [
+                            "misp-workflow:run=\"allowed\""
+                        ]
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "57q277772vi0n7dp0o8ftak",
+                    "module_type": "logic",
+                    "id": "tag-if",
+                    "name": "IF :: Tag",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.4"
+                },
+                "class": "block-type-if block-type-logic expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": []
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": []
+                    },
+                    "output_2": {
+                        "connections": []
+                    }
+                },
+                "pos_x": 2141.2864500253677,
+                "pos_y": 519
+            }
+        ],
+        "default": false,
+        "mermaid": "flowchart LR\n"
+    }
+}
