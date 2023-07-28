@@ -18,6 +18,17 @@ For more information about MISP workflows in MISP, the training materials [MISP 
 - [Remote `to_ids` flag if the indicator appears in known file list](https://github.com/MISP/misp-workflow-blueprints/blob/main/blueprints/blueprint_disable-to_ids-flag-for-existing-hash-in-hashlookup_1667228944.json) - Disable to_ids flag for existing hash in [hashlookup](https://www.hashlookup.io/).
 - [Set tag based on BGP Ranking maliciousness level](https://github.com/MISP/misp-workflow-blueprints/blob/main/blueprints/blueprint_set-tag-based-on-bgp-ranking-maliciousness-level_1668498668.json) - Set tag based on [BGP Ranking](https://bgpranking.circl.lu) maliciousness level.
 
+### Curation blueprints
+- [Curation - Allow curation process](./blueprints/blueprint_curation---allow-curation-process.json)
+- [Curation - Assign threat-level based on enriched location](./blueprints/blueprint_curation---assign-threat-level-based-on-enriched-location.json)
+- [Curation - Assign a country GalaxyCluster on IPs](./blueprints/blueprint_curation---assign-a-country-galaxycluster-on-ips.json)
+- [Curation - Normalize TLP & PAP Tag](./blueprints/blueprint_curation---normalize-tlp-&-pap-tag.json)
+- [Curation - Remove automation flag from known non-malicious hashes](./blueprints/blueprint_curation---remove-automation-flag-from-known-non-malicious-hashes.json)
+- [Curation - Remove automation flag from false-positive tripping over warninglist](./blueprints/blueprint_curation---remove-automation-flag-from-false-positive-tripping-over-warninglist.json)
+- [Curation - Remove automation flag from data having correlation with predefined feed](./blueprints/blueprint_curation---remove-automation-flag-from-data-having-correlation-with-predefined-feed.json)
+- [Curation - Toggle automation flag from network IoC based on AbuseIPDB](./blueprints/blueprint_curation---toggle-automation-flag-from-network-ioc-based-on-abuseipdb.json)
+- [Curation - Toggle automation flag from URLs based on Google-Safe-Browsing](./blueprints/blueprint_curation---toggle-automation-flag-from-urls-based-on-google-safe-browsing.json)
+
 ## How to contribute your workflow blueprints?
 
 It's very easy. Fork the repository, create a new JSON file with your blueprint and make a pull-request.
