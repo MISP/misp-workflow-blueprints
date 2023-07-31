@@ -1,0 +1,251 @@
+{
+    "WorkflowBlueprint": {
+        "id": "26",
+        "uuid": "0acf54da-ac75-4c5f-ad0c-c40da7977611",
+        "name": "Curation - Normalize TLP & PAP Tag",
+        "description": "Try to guess the TLP or PAP level from non-normalized tags and (potentially) replace them by their equivalent from the TLP or PAP taxonomy. Example: \"PAP--green\" becomes \"PAP:GREEN\"",
+        "timestamp": "1689267785",
+        "data": [
+            {
+                "id": 45,
+                "name": "Tag Replacement - PAP",
+                "data": {
+                    "indexed_params": {
+                        "scope": "all",
+                        "remove_substituted": "yes",
+                        "locality": "global"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "6tyi77772vi03yoo2jh2o2p",
+                    "module_type": "action",
+                    "id": "tag_replacement_pap",
+                    "name": "Tag Replacement - PAP",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "46",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": []
+                    }
+                },
+                "pos_x": 1130.8585958392323,
+                "pos_y": 1528.7683574969947
+            },
+            {
+                "id": 46,
+                "name": "Tag Replacement - TLP",
+                "data": {
+                    "indexed_params": {
+                        "scope": "all",
+                        "remove_substituted": "yes",
+                        "locality": "global"
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "6tyqi03vzihg18t5v",
+                    "module_type": "action",
+                    "id": "tag_replacement_tlp",
+                    "name": "Tag Replacement - TLP",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "47",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "45",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 675.8585958392323,
+                "pos_y": 1528.7683574969947
+            },
+            {
+                "id": 47,
+                "name": "IF :: Tag",
+                "data": {
+                    "indexed_params": {
+                        "scope": "event_attribute",
+                        "condition": "in_or",
+                        "tags": [
+                            "misp-workflow:mutability=\"allowed\""
+                        ],
+                        "clusters": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "6tyvp7772vi0agqk9xbkd3d",
+                    "module_type": "logic",
+                    "id": "tag-if",
+                    "name": "IF :: Tag",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.4"
+                },
+                "class": "block-type-if block-type-logic expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": []
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "46",
+                                "output": "input_1"
+                            }
+                        ]
+                    },
+                    "output_2": {
+                        "connections": [
+                            {
+                                "node": "49",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 248.6418269230769,
+                "pos_y": 1687.551588580839
+            },
+            {
+                "id": 48,
+                "name": "Tag Replacement - PAP",
+                "data": {
+                    "indexed_params": {
+                        "scope": "all",
+                        "remove_substituted": "no",
+                        "locality": "local",
+                        "relationship_type": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "6tzi77772vi0kzvvvq4e1i",
+                    "module_type": "action",
+                    "id": "tag_replacement_pap",
+                    "name": "Tag Replacement - PAP",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "49",
+                                "input": "output_1"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": []
+                    }
+                },
+                "pos_x": 1128.8585958392323,
+                "pos_y": 1846.7683574969947
+            },
+            {
+                "id": 49,
+                "name": "Tag Replacement - TLP",
+                "data": {
+                    "indexed_params": {
+                        "scope": "all",
+                        "remove_substituted": "no",
+                        "locality": "local",
+                        "relationship_type": ""
+                    },
+                    "saved_filters": {
+                        "selector": "",
+                        "value": "",
+                        "operator": "",
+                        "path": ""
+                    },
+                    "node_uid": "6tzkeeeecyi0uwpd8bgqqb",
+                    "module_type": "action",
+                    "id": "tag_replacement_tlp",
+                    "name": "Tag Replacement - TLP",
+                    "multiple_output_connection": false,
+                    "previous_module_version": "?",
+                    "module_version": "0.1"
+                },
+                "class": "block-type-default expect-misp-core-format",
+                "typenode": false,
+                "inputs": {
+                    "input_1": {
+                        "connections": [
+                            {
+                                "node": "47",
+                                "input": "output_2"
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "output_1": {
+                        "connections": [
+                            {
+                                "node": "48",
+                                "output": "input_1"
+                            }
+                        ]
+                    }
+                },
+                "pos_x": 673.8585958392325,
+                "pos_y": 1846.7683574969947
+            }
+        ],
+        "default": false,
+        "mermaid": "flowchart LR\n    47[/\"fas:fa-code-branch  IF :: Tag\"/] --> 46[\"fas:fa-tags  Tag Replacement - TLP\"]\n    47[/\"fas:fa-code-branch  IF :: Tag\"/] --> 49[\"fas:fa-tags  Tag Replacement - TLP\"]\n    49[\"fas:fa-tags  Tag Replacement - TLP\"] --> 48[\"fas:fa-tags  Tag Replacement - PAP\"]\n"
+    }
+}
